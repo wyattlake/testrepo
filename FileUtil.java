@@ -6,30 +6,45 @@ import java.util.Scanner;
 
 class FileUtil {
     public static void writeToFile(String path, String data) throws Exception {
+        // Creating a file writer
         BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+
+        // Writing to the file
         writer.write(data);
 
+        // Closing the writer
         writer.close();
     }
 
     public static String readFromFile(String path) throws Exception {
+        // Creating a StringBuilder to store file data
         StringBuilder stringBuilder = new StringBuilder();
+
+        // Declaring the File object
         File file = new File(path);
 
+        // Making sure the file exists
         if (file.exists()) {
+            // Creating a scanner to read the file
             Scanner reader = new Scanner(file);
 
+            // Looping through the file's lines and adding them to the StringBuilder with
+            // newlines
             while (reader.hasNextLine()) {
                 stringBuilder.append(reader.nextLine() + "\n");
             }
 
+            // Closing the reader
             reader.close();
         } else {
+            // Throwing an exception if the file doesn't exist
             throw new FileNotFoundException();
         }
 
+        // Deleting the extra newline at the end
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 
+        // Returning our finished string
         return stringBuilder.toString();
     }
 }
