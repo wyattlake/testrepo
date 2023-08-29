@@ -16,7 +16,37 @@ class FileUtil {
         writer.close();
     }
 
+    public static int characterCount(String filename) throws Exception {
+        // Initializing character count
+        int characterCount = 0;
+
+        // Creating a File object
+        File file = new File(filename);
+
+        // Making sure the file exists
+        if (file.exists()) {
+            // Creating a scanner to read the file
+            Scanner reader = new Scanner(file);
+
+            // Looping through the file's characters and counting them
+            while (reader.hasNext()) {
+                String line = reader.nextLine();
+                characterCount += line.length();
+            }
+
+            // Closing the reader
+            reader.close();
+        } else {
+            // Throwing an exception if the file doesn't exist
+            throw new FileNotFoundException();
+        }
+
+        // Returning the total character count
+        return characterCount;
+    }
+
     public static String readFromFile(String path) throws Exception {
+
         // Creating a StringBuilder to store file data
         StringBuilder stringBuilder = new StringBuilder();
 
